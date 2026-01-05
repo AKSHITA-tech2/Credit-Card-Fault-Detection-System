@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fraud Detection System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL THEME ===== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #0f2027, #000);
+    color: #e0e0e0;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+.card {
+    background: rgba(15, 15, 15, 0.9);
+    border: 1px solid #00ffcc44;
+    box-shadow: 0 0 20px #00ffcc33;
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+/* ===== FORMS ===== */
+form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 5px;
+    background: #111;
+    color: #00ffcc;
+    border: 1px solid #00ffcc55;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 8px #00ffcc;
+}
+
+button.submit {
+    grid-column: 1 / -1;
+    padding: 12px;
+    background: #00ffcc;
+    border: none;
+    color: black;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button.submit:hover {
+    background: #00cca3;
+}
+</style>
+</head>
+
+<body>
+
+<h1> Credit Card Fraud Detection System </h1>
+<h2> By Akshita Raghavan</h2>
+
+<div class="container">
+
+<div class="card">
+<h2>Transaction Analysis</h2>
+
+<form onsubmit="submitFraudCheck(event)">
+    <input id="amt" type="number" step="0.01" min="0" placeholder="Amount" required>
+    <input id="category" type="number" step="1" min="0" placeholder="Category (encoded)" required>
+    <input id="gender" type="number" step="1" min="0" max="1" placeholder="Gender (0/1)" required>
+    <input id="job" type="number" step="1" min="0" placeholder="Job (encoded)" required>
+    <input id="hour" type="number" step="1" min="0" max="23" placeholder="Hour (0–23)" required>
+    <input id="day" type="number" step="1" min="1" max="31" placeholder="Day (1–31)" required>
+    <input id="month" type="number" step="1" min="1" max="12" placeholder="Month (1–12)" required>
+    <input id="weekday" type="number" step="1" min="0" max="6" placeholder="Weekday (0–6)" required>
+    <input id="lat" type="number" step="0.000001" min="-90" max="90" placeholder="Latitude" required>
+    <input id="long" type="number" step="0.000001" min="-180" max="180" placeholder="Longitude" required>
+    <input id="merch_lat" type="number" step="0.000001" min="-90" max="90" placeholder="Merchant Latitude" required>
+    <input id="merch_long" type="number" step="0.000001" min="-180" max="180" placeholder="Merchant Longitude" required>
+    <input id="city_pop" type="number" step="1" min="0" placeholder="City Population" required>
+    <input id="distance" type="number" step="0.01" min="0" placeholder="Distance (km)" required>
+    <input id="unix_time" type="number" step="1" min="0" placeholder="Unix Time" required>
+    <button class="submit" type="submit">Analyze Transaction</button>
+</form>
+
+<p id="result" style="text-align:center; margin-top:15px;"></p>
+</div>
+
+</div>
+<script>
+async function submitFraudCheck(e) {
+    e.preventDefault();
+
+    const data = {
+        amt: Number(document.getElementById("amt").value),
+        category: Number(document.getElementById("category").value),
+        gender: Number(document.getElementById("gender").value),
+        job: Number(document.getElementById("job").value),
+        hour: Number(document.getElementById("hour").value),
+        day: Number(document.getElementById("day").value),
+        month: Number(document.getElementById("month").value),
+        weekday: Number(document.getElementById("weekday").value),
+        lat: Number(document.getElementById("lat").value),
+        long: Number(document.getElementById("long").value),
+        merch_lat: Number(document.getElementById("merch_lat").value),
+        merch_long: Number(document.getElementById("merch_long").value),
+        city_pop: Number(document.getElementById("city_pop").value),
+        distance: Number(document.getElementById("distance").value),
+        unix_time: Number(document.getElementById("unix_time").value)
+    };
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error("Prediction request failed");
+        }
+
+        const result = await response.json();
+
+        const fraudText =
+            result.fraud === 1
+                ? "<b>FRAUD DETECTED</b>"
+                : "<b>Legitimate Transaction</b>";
+
+        document.getElementById("result").innerHTML = `
+            ${fraudText}<br>
+            <small>Fraud Probability: ${result.probability}</small>
+        `;
+
+    } catch (error) {
+        console.error(error);
+        document.getElementById("result").innerHTML =
+            " Error connecting to prediction service";
+    }
+}
+</script>
+
+</body>
+</html>

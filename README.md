@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Overview
+##  Overview
 
 The **Credit Card Fraud Detection System** is an end-to-end machine learning project that detects fraudulent credit card transactions in real time.
 It combines **data preprocessing, model training, a FastAPI backend, and a web-based frontend** to demonstrate how ML models are deployed in real-world applications.
@@ -207,7 +207,7 @@ This project demonstrates:
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 *  Fraud probability visualization (progress bar)
 *  Store predictions in MySQL
@@ -221,7 +221,7 @@ Output
 <img width="1614" height="766" alt="Screenshot 2026-01-05 212732" src="https://github.com/user-attachments/assets/8e80e952-7d60-447c-b372-b216cea59cc9" />
 
 
-## 👤 Author
+## Author
 
 **Akshita Raghavan**
 
@@ -229,4 +229,5 @@ Output
 * GitHub: [https://github.com/AKSHITA-tech2](https://github.com/AKSHITA-tech2)
 
 ---
+
 

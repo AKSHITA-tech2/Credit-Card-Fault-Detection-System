@@ -1,86 +1,96 @@
-# Credit Card Fraud Detection System
+# 💳 Credit Card Fraud Detection System
 
 **End-to-End Machine Learning Application with FastAPI & Web Frontend**
 
 ---
 
-##  Overview
+## 📌 Overview
 
-The **Credit Card Fraud Detection System** is an end-to-end machine learning project that detects fraudulent credit card transactions in real time.
-It combines **data preprocessing, model training, a FastAPI backend, and a web-based frontend** to demonstrate how ML models are deployed in real-world applications.
+The **Credit Card Fraud Detection System** is a production-style machine learning project that detects fraudulent transactions in real time.
 
-This project focuses not only on model accuracy, but also on **production-ready ML deployment practices**, including feature consistency, API design, and version control hygiene.
+It demonstrates the **complete ML lifecycle**:
 
----
+> **Data preprocessing → model training → API deployment → frontend inference**
 
-## Key Features
+Unlike notebook-only projects, this system focuses on **real-world ML engineering practices**, including:
 
-* **Real-time fraud prediction** using a trained ML model
-* **FastAPI backend** serving predictions via REST API
-* **Interactive frontend** for entering transaction details
-* **Proper feature engineering & scaling** aligned with training pipeline
-* **Robust handling of training-only features** (industry-grade inference logic)
-* Clean Git repository (no large datasets or model artifacts committed)
+* feature consistency between training & inference
+* API-based prediction serving
+* scalable backend design
+* clean Git workflows
+* deployment-ready architecture
 
 ---
 
-## Machine Learning Details
+## 🚀 Key Features
 
-* **Problem Type:** Binary Classification (Fraud / Legitimate)
-* **Algorithm Used:** Logistic Regression
+* ✅ Real-time fraud prediction using a trained ML model
+* ✅ REST API built with **FastAPI**
+* ✅ Interactive web frontend for transaction input
+* ✅ Robust preprocessing & scaling aligned with training pipeline
+* ✅ Strict feature-ordering enforcement at inference time
+* ✅ Industry-grade handling of unseen inputs
+* ✅ Clean Git repository (no datasets or large artifacts committed)
+
+---
+
+## 🧠 Machine Learning Details
+
+* **Problem Type:** Binary Classification (Fraud vs Legitimate)
+* **Model:** Logistic Regression
 * **Preprocessing:**
 
-  * Feature scaling using `StandardScaler`
-  * Consistent feature ordering during inference
-* **Evaluation Metric:** Probability-based fraud detection
+  * Standardization using `StandardScaler`
+  * Deterministic feature ordering for inference
+* **Evaluation:** Probability-based fraud scoring
 
-> *Special attention was given to ensuring that inference-time features exactly match training-time features — a common real-world ML deployment pitfall.*
+> ⚠️ *Special care was taken to prevent training-inference mismatch — one of the most common real-world ML deployment failures.*
 
 ---
 
-## Project Architecture
+## 🏗 Project Architecture
 
 ```
 Credit-Card-Fraud-Detection-System/
 │
-├── api.py                 # FastAPI backend (prediction API)
+├── api.py                 # FastAPI backend
 ├── frontend/
-│   └── index.html         # Web UI for fraud detection
-├── requirements.txt       # Project dependencies
-├── README.md              # Project documentation
-├── .gitignore             # Clean repo configuration
+│   └── index.html         # Web UI
+├── requirements.txt
+├── README.md
+├── .gitignore
 │
-├── data/                  # (Ignored) Large datasets
-├── model/                 # (Ignored) Trained ML artifacts
-├── notebooks/             # (Ignored) Training notebooks
-└── .venv/                 # (Ignored) Virtual environment
+├── data/                  # (ignored) datasets
+├── model/                 # (ignored) trained artifacts
+├── notebooks/             # (ignored) experiments
+└── .venv/                 # (ignored) virtual env
 ```
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 ### Languages & Libraries
 
-* **Python**
-* **NumPy**
-* **scikit-learn**
-* **FastAPI**
-* **Pydantic**
-* **HTML, CSS, JavaScript**
+* Python
+* NumPy
+* scikit-learn
+* FastAPI
+* Pydantic
+* HTML / CSS / JavaScript
 
-### 🛠 Tools
+### Tools
 
 * Git & GitHub
-* PowerShell (Windows)
 * VS Code
-* Virtual Environment (`venv`)
+* PowerShell
+* Python `venv`
 
 ---
 
-## API Endpoints
+## 🔌 API Endpoints
 
-###  Health Check
+### ✅ Health Check
 
 ```
 GET /
@@ -96,13 +106,13 @@ Response:
 
 ---
 
-### Fraud Prediction
+### 🔮 Fraud Prediction
 
 ```
 POST /predict
 ```
 
-#### Sample Input
+#### Sample Request
 
 ```json
 {
@@ -124,7 +134,7 @@ POST /predict
 }
 ```
 
-#### Sample Output
+#### Sample Response
 
 ```json
 {
@@ -136,9 +146,9 @@ POST /predict
 
 ---
 
-## How to Run the Project
+## ⚙️ How to Run Locally
 
-### 1️.Clone the Repository
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/AKSHITA-tech2/Credit-Card-Fault-Detection-System.git
@@ -147,7 +157,7 @@ cd Credit-Card-Fault-Detection-System
 
 ---
 
-### 2️. Create & Activate Virtual Environment
+### 2️⃣ Create Virtual Environment
 
 ```bash
 python -m venv .venv
@@ -156,7 +166,7 @@ python -m venv .venv
 
 ---
 
-### 3️. Install Dependencies
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -164,70 +174,75 @@ pip install -r requirements.txt
 
 ---
 
-### 4️. Start Backend Server
+### 4️⃣ Start API Server
 
 ```bash
 python -m uvicorn api:app --reload
 ```
 
-* API Docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+Visit:
+
+👉 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ---
 
-### 5️. Run Frontend
+### 5️⃣ Launch Frontend
 
-* Open `frontend/index.html` using **Live Server** (VS Code)
+* Open `frontend/index.html` using VS Code **Live Server**
 * Enter transaction details
-* View fraud prediction instantly
+* Receive fraud predictions instantly
 
 ---
 
-## Dataset Information
+## 📂 Dataset Notes
 
-Due to GitHub size limitations, **datasets and trained model files are not included** in this repository.
+To keep the repository lightweight:
 
-* Datasets used: Credit Card Transactions (Fraud Detection)
-* Place datasets inside the `data/` folder before training
-* Model artifacts can be regenerated by retraining
+* datasets are excluded
+* trained models are excluded
+* artifacts can be regenerated locally
 
----
+Place raw datasets inside:
 
-## Key Learning Outcomes
+```
+data/
+```
 
-This project demonstrates:
-
-* End-to-end ML system design
-* Feature consistency between training & inference
-* Handling real-world deployment bugs
-* API-based ML serving
-* Clean Git practices for ML projects
-* Debugging production ML pipelines
-
-> 💬 *Many ML models fail not because of accuracy, but because of deployment mismatches — this project explicitly addresses that.*
+Retrain models to recreate artifacts.
 
 ---
 
-## Future Improvements
+## 🎯 Key Learning Outcomes
 
-*  Fraud probability visualization (progress bar)
-*  Store predictions in MySQL
-*  Authentication (Sign In / Sign Up)
-*  Cloud deployment (Render / Railway)
-*  Dockerization
+This project showcases:
+
+* end-to-end ML system engineering
+* feature-safe deployment pipelines
+* REST-based ML serving
+* inference-time validation
+* debugging production ML issues
+* Git hygiene for ML workflows
+* scalable API design
+
+> 💬 *In real ML systems, deployment mistakes often matter more than raw model accuracy — this project was designed to prevent exactly those failures.*
 
 ---
-Output
 
-<img width="1614" height="766" alt="Screenshot 2026-01-05 212732" src="https://github.com/user-attachments/assets/8e80e952-7d60-447c-b372-b216cea59cc9" />
+## 🔮 Future Improvements
 
+* 📊 Fraud probability visualization
+* 🗄 Store predictions in MySQL
+* 🔐 Authentication system
+* ☁ Cloud deployment (Render / Railway)
+* 🐳 Docker containerization
 
-## Author
+---
+
+## 👤 Author
 
 **Akshita Raghavan**
-
 
 * GitHub: [https://github.com/AKSHITA-tech2](https://github.com/AKSHITA-tech2)
 
 ---
-
 
